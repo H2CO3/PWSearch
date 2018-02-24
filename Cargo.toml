@@ -1,0 +1,8 @@
+[package]
+name = "pwsearch"
+version = "0.1.0"
+authors = ["Árpád Goretity <h2co3@h2co3.org>"]
+
+[dependencies]
+sha1 = { version = "0.6.0", features = ["std"] }
+rpassword = "1.0.0"
