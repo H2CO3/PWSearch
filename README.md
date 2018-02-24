@@ -13,7 +13,7 @@ Hence, I have created this little utility that you can use for checking your bel
 2. Move it to the root directory of this repository.
 3. Run the `make_searchable.sh` script in this directory. It will extract the archive, sort it (in order to be able to perform binary search on it), and edit it so that only the hashes remain in the file. (Again, this makes it possible for the search tool to perform a binary search.)
 
-    **Keep in mind that the script will delete any intermediate files as long as they are needed, including the original 7z archive.** This is done because the files are *huge,* so otherwise you may well end up running out of disk space before the conversion has a chance to complete.
+    **Keep in mind that the script will delete any intermediate files as soon as they are not needed anymore, including the original 7z archive.** This is done because the files are *huge,* so otherwise you may well end up running out of disk space before the conversion has a chance to complete.
 
 4. `cargo run` - this will build and run the actual search program. You will need a Rust toolchain for this step.
 5. When it asks for your password, specify it. Don't worry – you can read the source code and see for yourself that it doesn't do anything funny with it. :P That's kind of **the point** of using this tool on your own machine.
