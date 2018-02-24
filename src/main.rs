@@ -14,8 +14,6 @@ fn search<T: Read + Seek>(mut db: T, hash: &str) -> Option<usize> {
     let mut lower = 0;
     let mut upper = num_lines;
 
-    db.seek(SeekFrom::Start(0)).expect("can't seek");
-
     // Binary search the sorted file
     while lower < upper {
         let middle = lower + (upper - lower) / 2;
@@ -37,16 +35,8 @@ fn search<T: Read + Seek>(mut db: T, hash: &str) -> Option<usize> {
 fn main() {
     let db_fname = args().nth(1).unwrap_or(String::from("pwned-passwords-2.0-cut.txt"));
     let db = File::open(db_fname).expect("DB file");
+    let pw = rpassword::prompt_password_stdout("\nPassword to search: ").expect("password");
 
-    let pw = {
-        let mut pw = rpassword::prompt_password_stdout("\nPassword to search: ").expect("password");
-
-        if pw.as_bytes().last() == Some(&b'\n') {
-            pw.pop();
-        }
-
-        pw
-    };
     let hash = {
         let mut hash = sha1::Sha1::from(&pw).hexdigest();
         hash.make_ascii_uppercase();
